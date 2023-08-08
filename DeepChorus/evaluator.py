@@ -1,3 +1,5 @@
+# evaluator.py
+
 import copy
 from itertools import count
 import librosa
@@ -72,6 +74,7 @@ def get_result_dict(model, features_dict, labels_dict):
     np_labels = {}
     orig_dict = {}
 
+    print("length of labels_dict: ", len(labels_dict.keys()))
     for key in labels_dict.keys():
         feature = features_dict[key]
         feature_length = len(feature[1])
@@ -125,23 +128,12 @@ def test_dict_result(result_dict, gt_dict):
         result_np = scale_result(result_np)
         result_np = median_filter(result_np, 9)
 
-        if gt_dict[key].sum() != 0:
-            counter += 1
-            auc = roc_auc_score(gt_dict[key], result_np)
-            print('Testing ({}/ {}): {}\t'.format(counter, len(result_dict), key, auc), end='\r')
-            for i in range(len(result_np)):
-                if result_np[i] < 0.5:
-                    result_np[i] = 0
-                else:
-                    result_np[i] = 1
+        for i in range(len(result_np)):
+            if result_np[i] < 0.5:
+                result_np[i] = 0
+            else:
+                result_np[i] = 1
 
-            res_list.append(auc)
             new_dict[key] = result_np
 
-    auc = 0
-
-    for i in range(len(new_dict)):
-        auc += res_list[i] / len(new_dict)
-    r, p, f = get_rpf(new_dict, gt_dict)
-
-    return r, p, f, auc
+    return new_dict

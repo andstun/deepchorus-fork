@@ -1,10 +1,4 @@
-'''
-Please replace the "test_feature_files" and "test_annotation_files" parameters in constant.py with the extracted feature
-joblib file and the joblib file with the specified label format , where the format of the label is:
-
-    dict = { 'song_name' = [[0, 10], [52, 80], ...], ...}
-
-'''
+# constant.py
 
 ## feature parameters
 # 1s = 43frame
@@ -59,12 +53,8 @@ valid_annotation_file = [
 
 ## testing files
 test_annotation_files = [
-    # ANNOTATION_PATH + 'RWC.joblib',
-    # ANNOTATION_PATH + 'SP.joblib',
-    # ANNOTATION_PATH + 'SL.joblib',
+    "/content/DeepChorus/label_name.joblib"
 ]
 test_feature_files = [
-    # FEATURE_PATH + 'RWC.joblib',
-    # FEATURE_PATH + 'SP.joblib',
-    # FEATURE_PATH + 'SL.joblib',
+    "/content/DeepChorus/feature_name.joblib"
 ]

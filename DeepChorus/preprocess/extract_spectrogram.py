@@ -1,8 +1,11 @@
+#extract_spectrogram.py
+
 import os
 import warnings
 import numpy as np
 import joblib
 import librosa
+import argparse
 warnings.filterwarnings("ignore", category=UserWarning)
 
 SR = 22050
@@ -41,19 +44,33 @@ def extract_features(file):
     return data
 
 
-def folder_to_joblib(base_folder, feature_file):
+def folder_to_joblib(base_folder, feature_file, label_file):
     feature_set = {}
+    label_set = {}
+    keys = ""
     for (dirpath, _, filenames) in os.walk(base_folder):
         for file in [f for f in filenames if f.endswith('.mp3') or f.endswith('.wav')]:
             key = '{}'.format(file.replace('.mp3', ''))
 
             features = extract_features(os.path.join(dirpath, file))
             feature_set[key] = features
+            label_set[key] = [[0,0]]
+
             print(key, np.shape(features))
+            keys += key + '\n'
 
     joblib.dump(feature_set, feature_file)
     print(len(feature_set), 'features saved to', feature_file)
+    joblib.dump(label_set, label_file)
+    print(len(feature_set), 'features saved to', label_file)
+    with open("keys.txt", "w") as f:
+        f.write(keys.strip())
+    print("Succesfully wrote key names to keys.txt")
 
 
 if __name__ == '__main__':
-    folder_to_joblib('/Users/kevinhu/Downloads/Ozone_AI_Music/2000_Pop/Hey Ya --7XnDlYY9qw-128k-1686654433.mp3', 'feature_name.joblib')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("path")
+    args = parser.parse_args()
+
+    folder_to_joblib(args.path, 'feature_name.joblib', 'label_name.joblib')
