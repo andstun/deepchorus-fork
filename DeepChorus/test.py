@@ -28,7 +28,7 @@ network_module = importlib.import_module('network.' + args.network)
 create_model = network_module.create_model
 
 # Loading Model
-model_file = "/content/DeepChorus/model/Deepchorus_2021.h5"
+model_file = "/content/deepchorus-fork/DeepChorus/model/Deepchorus_2021.h5"
 model = create_model(input_shape=SHAPE, chunk_size=CHUNK_SIZE)
 model.compile(loss='binary_crossentropy', optimizer=(Adam(lr=LR)),
               metrics=[tf.keras.metrics.BinaryAccuracy(threshold=0.5), tf.keras.metrics.Recall()])

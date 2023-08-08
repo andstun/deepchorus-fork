@@ -45,6 +45,7 @@ def extract_features(file):
 
 
 def folder_to_joblib(base_folder, feature_file, label_file):
+    print(f"Processing folder: {base_folder}")
     feature_set = {}
     label_set = {}
     keys = ""

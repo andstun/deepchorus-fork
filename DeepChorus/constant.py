@@ -53,8 +53,8 @@ valid_annotation_file = [
 
 ## testing files
 test_annotation_files = [
-    "/content/DeepChorus/label_name.joblib"
+    "/content/deepchorus-fork/DeepChorus/label_name.joblib"
 ]
 test_feature_files = [
-    "/content/DeepChorus/feature_name.joblib"
+    "/content/deepchorus-fork/DeepChorus/feature_name.joblib"
 ]
