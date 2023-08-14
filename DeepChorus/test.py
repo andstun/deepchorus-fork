@@ -46,9 +46,9 @@ print('Loaded labels for {} files from {}.'.format(len(labels), test_annotation_
 print('Testing...')
 predictions_dict, target_dict = get_result_dict(model, features, labels)
 
-joblib.dump(target_dict, 'result/ground_truth.joblib')
-joblib.dump(predictions_dict, 'result/result.joblib')
+joblib.dump(target_dict, 'ground_truth.joblib')
+joblib.dump(predictions_dict, 'result.joblib')
 
 binarized_dict = test_dict_result(predictions_dict, target_dict)
-joblib.dump(binarized_dict, 'result/binarized_result.joblib')
+joblib.dump(binarized_dict, 'binarized_result.joblib')
 print("Test succesfully completed.")
