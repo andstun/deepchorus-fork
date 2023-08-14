@@ -74,4 +74,4 @@ if __name__ == '__main__':
     parser.add_argument("path")
     args = parser.parse_args()
 
-    folder_to_joblib(args.path, 'feature_name.joblib', 'label_name.joblib')
+    folder_to_joblib(args.path, 'deepchorus-fork/DeepChorus/feature_name.joblib', 'deepchorus-fork/DeepChorus/label_name.joblib')
